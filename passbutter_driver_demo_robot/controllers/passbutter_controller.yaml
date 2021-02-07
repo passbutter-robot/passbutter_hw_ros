@@ -1,0 +1,18 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 2  # Hz
+
+    passbutter_controller:
+      type: passbutter_controller/PassbutterController
+
+    joint_state_controller:
+      type: joint_state_controller/JointStateController
+
+forward_command_controller_position:
+  ros__parameters:
+    joints:
+      - axis0
+      - axis1
+      - axis2
+      - axis3
+    interface_name: position

@@ -1,0 +1,6 @@
+<library path="passbutter_controller">
+  <class name="passbutter_controller/PassbutterController" type="passbutter_controller::PassbutterController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+  </description>
+  </class>
+</library>
