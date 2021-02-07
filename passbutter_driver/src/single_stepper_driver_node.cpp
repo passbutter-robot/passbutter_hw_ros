@@ -33,6 +33,7 @@ void SingleStepperDriverNode::stepperCallback(const example_interfaces::msg::Int
     for (int i = 0; i < std::abs(msg->data); i++)
     {
         this->stepperControl->move(backwards);
+        usleep(500);
     }
 }
 
