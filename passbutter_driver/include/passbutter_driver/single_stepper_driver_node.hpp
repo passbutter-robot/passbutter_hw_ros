@@ -13,6 +13,7 @@ private:
     void stepperCallback(const example_interfaces::msg::Int32::SharedPtr msg);
 
     passbutter::StepperControl *stepperControl;
+    bool foundBoard;
 
 public:
     SingleStepperDriverNode();

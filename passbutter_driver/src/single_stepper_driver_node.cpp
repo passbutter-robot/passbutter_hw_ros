@@ -12,15 +12,19 @@ SingleStepperDriverNode::SingleStepperDriverNode()
     this->_steps = this->create_subscription<example_interfaces::msg::Int32>("steps", 10,
             std::bind(&SingleStepperDriverNode::stepperCallback, this, std::placeholders::_1));
 
-    this->stepperControl = new passbutter::StepperControl("stepper", 1, 0.3);
+    this->stepperControl = new passbutter::StepperControl("stepper", 0.3, 0.1);
     std::vector<int> boardAddrs = this->stepperControl->detectBoards(1);
     if (boardAddrs.size() == 0)
     {
         RCLCPP_ERROR(this->get_logger(), "no boards detected..");
+        this->foundBoard = false;
     }
     else
     {
         this->stepperControl->initBus(boardAddrs[0]);
+        this->foundBoard = true;
+
+        this->stepperControl->initSteps();
     }
 }
 
