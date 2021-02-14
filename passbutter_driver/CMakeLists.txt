@@ -21,28 +21,18 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(stepper_driver_node 
+add_executable(stepper_driver 
   src/stepper_driver_node.cpp
-  src/stepper_driver.cpp
   src/ThunderBorg/src/ThunderBorg.cpp)
-ament_target_dependencies(stepper_driver_node rclcpp ros2_control)
+ament_target_dependencies(stepper_driver rclcpp ros2_control example_interfaces)
 
-add_executable(single_stepper_driver 
-  src/single_stepper_driver_node.cpp
-  src/stepper_driver.cpp
-  src/ThunderBorg/src/ThunderBorg.cpp)
-ament_target_dependencies(single_stepper_driver rclcpp ros2_control example_interfaces)
-
-add_executable(single_stepper_command 
-  src/single_stepper_command_node.cpp
-  src/stepper_driver.cpp
-  src/ThunderBorg/src/ThunderBorg.cpp)
-ament_target_dependencies(single_stepper_command rclcpp ros2_control example_interfaces)
+add_executable(stepper_command 
+  src/stepper_command_node.cpp)
+ament_target_dependencies(stepper_command rclcpp ros2_control example_interfaces)
 
 install(TARGETS
-  stepper_driver_node
-  single_stepper_driver
-  single_stepper_command
+  stepper_driver
+  stepper_command
   DESTINATION lib/${PROJECT_NAME}
 )
 

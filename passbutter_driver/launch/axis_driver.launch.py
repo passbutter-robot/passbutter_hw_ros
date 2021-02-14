@@ -23,25 +23,25 @@ def generate_launch_description():
 
     return launch.LaunchDescription([
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='stepper_driver', output='screen',
             name='axis_0',
             parameters=[
                 axis_0_params
             ]),
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='stepper_driver', output='screen',
             name='axis_1',
             parameters=[
                 axis_1_params
             ]),
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='stepper_driver', output='screen',
             name='axis_2',
             parameters=[
                 axis_2_params
             ]),
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='stepper_driver', output='screen',
             name='axis_3',
             parameters=[
                 axis_3_params

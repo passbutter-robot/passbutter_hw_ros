@@ -1,31 +1,31 @@
 axis_0:
   ros__parameters:
     bus_number: 1
-    board_address: 10
     step_delay_ms: 5
     max_power: 0.3
     holding_power: 0.1
+    board_addresses: [ 10 ]
 
 axis_1:
   ros__parameters:
     bus_number: 1
-    board_address: 11
     step_delay_ms: 5
     max_power: 0.3
     holding_power: 0.1
+    board_addresses: [ 11 ]
 
 axis_2:
   ros__parameters:
     bus_number: 1
-    board_address: 12
     step_delay_ms: 5
     max_power: 0.3
     holding_power: 0.1
+    board_addresses: [ 12 ]
 
 axis_3:
   ros__parameters:
     bus_number: 1
-    board_address: 13
     step_delay_ms: 5
     max_power: 0.3
     holding_power: 0.1
+    board_addresses: [ 13 ]

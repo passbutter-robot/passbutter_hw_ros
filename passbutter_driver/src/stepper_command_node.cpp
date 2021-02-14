@@ -1,12 +1,12 @@
-#include "../include/passbutter_driver/single_stepper_command_node.hpp"
+#include "../include/passbutter_driver/stepper_command_node.hpp"
 
 namespace passbutter_driver
 {
 
-SingleStepperCommandNode::SingleStepperCommandNode()
-    : Node("single_stepper_command")
+StepperCommandNode::StepperCommandNode()
+    : Node("stepper_command")
 {
-    RCLCPP_INFO(this->get_logger(), "initialize node 'single_stepper_command'");
+    RCLCPP_INFO(this->get_logger(), "initialize node 'stepper_command'");
 
     rcl_interfaces::msg::ParameterDescriptor step_count_descriptor;
     step_count_descriptor.name = "step_count";
@@ -30,11 +30,11 @@ SingleStepperCommandNode::SingleStepperCommandNode()
     
     this->_steps = this->create_publisher<example_interfaces::msg::Int32>("steps", this->_stepCount);
     this->_timer = this->create_wall_timer(std::chrono::seconds(rateSeconds),
-            std::bind(&SingleStepperCommandNode::timer_callback, this));
+            std::bind(&StepperCommandNode::timer_callback, this));
     this->_reverse = false;
 }
 
-void SingleStepperCommandNode::timer_callback()
+void StepperCommandNode::timer_callback()
 {
     auto msg = example_interfaces::msg::Int32();
     msg.data = this->_stepCount;
@@ -51,7 +51,7 @@ void SingleStepperCommandNode::timer_callback()
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
-    auto node = std::make_shared<passbutter_driver::SingleStepperCommandNode>();
+    auto node = std::make_shared<passbutter_driver::StepperCommandNode>();
     rclcpp::spin(node);
     rclcpp::shutdown();
 

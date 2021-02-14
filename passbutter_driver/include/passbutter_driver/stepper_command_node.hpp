@@ -4,7 +4,7 @@
 namespace passbutter_driver
 {
 
-class SingleStepperCommandNode : public rclcpp::Node
+class StepperCommandNode : public rclcpp::Node
 {
 private:
     rclcpp::Publisher<example_interfaces::msg::Int32>::SharedPtr _steps;
@@ -16,7 +16,7 @@ private:
     void timer_callback();
 
 public:
-    SingleStepperCommandNode();
+    StepperCommandNode();
     
 };
 
