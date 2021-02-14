@@ -4,4 +4,4 @@ multi_axis_driver:
     step_delay_ms: 5
     max_power: 0.3
     holding_power: 0.1
-    board_addresses: [10, 11, 12, 13]
+    board_addresses: [10,11,12,13]
