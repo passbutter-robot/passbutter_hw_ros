@@ -34,7 +34,6 @@ StepperDriverNode::StepperDriverNode()
     this->declare_parameter("holding_power", 0.0, holding_power_descriptor);
 
     this->declare_parameter("board_addresses");
-    this->set_parameter(rclcpp::Parameter("board_addresses", std::vector<int>({0})));
 
     int busNumber = -1;
     this->get_parameter<int>("bus_number", busNumber);
@@ -51,9 +50,9 @@ StepperDriverNode::StepperDriverNode()
     this->get_parameter<double>("holding_power", holdingPower);
     RCLCPP_INFO(this->get_logger(), "holding power=%f", holdingPower);
 
-    std::vector<int> boardAddresses;
-    this->get_parameter("board_addresses", boardAddresses);
-    
+    rclcpp::Parameter boardAdressesParam = this->get_parameter("board_addresses");
+    std::vector<int64_t> boardAddresses = boardAdressesParam.as_integer_array();
+
     if (busNumber < 0 || boardAddresses.size() == 0)
     {
         busNumber = 1;
