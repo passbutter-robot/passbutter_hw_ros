@@ -87,6 +87,17 @@ StepperDriverNode::StepperDriverNode()
         std::bind(&StepperDriverNode::stepperCallback, this, std::placeholders::_1));
 }
 
+StepperDriverNode::~StepperDriverNode()
+{
+    if (this->stepperControls.size() > 0)
+    {
+        for (int i = 0; i < this->stepperControls.size(); i++)
+        {
+            delete this->stepperControls[i];
+        }
+    }
+}
+
 void StepperDriverNode::stepperCallback(const example_interfaces::msg::Int32::SharedPtr msg)
 {
     RCLCPP_INFO(this->get_logger(), "received stepper callback: steps=%d", msg->data);
