@@ -94,13 +94,19 @@ void StepperDriverNode::stepperCallback(const example_interfaces::msg::Int32::Sh
 
     bool backwards = msg->data < 0;
 
+    for (int i = 0; i < std::abs(msg->data); i++)
+    {
+        for (int j = 0; j < this->stepperControls.size(); j++)
+        {
+            this->stepperControls[j]->move(backwards);
+        }
+        
+        rclcpp::sleep_for(std::chrono::milliseconds(this->_stepDelayMS));
+    }
+
     for (int i = 0; i < this->stepperControls.size(); i++)
     {
-        for (int j = 0; j < std::abs(msg->data); j++)
-        {
-            this->stepperControls[i]->move(backwards);
-            rclcpp::sleep_for(std::chrono::milliseconds(this->_stepDelayMS));
-        }
+        this->stepperControls[i]->holdPosition();
     }
 }
 
