@@ -21,19 +21,49 @@ SingleStepperDriverNode::SingleStepperDriverNode()
     board_address_descriptor.description = "the thunderborg i2c board address";
     this->declare_parameter("board_address", 0, board_address_descriptor);
 
+    rcl_interfaces::msg::ParameterDescriptor step_delay_ms_descriptor;
+    step_delay_ms_descriptor.name = "step_delay_ms";
+    step_delay_ms_descriptor.type = rcl_interfaces::msg::ParameterType::PARAMETER_INTEGER;
+    step_delay_ms_descriptor.description = "the delay between two steps in milliseconds";
+    this->declare_parameter("step_delay_ms", 5, step_delay_ms_descriptor);
+
+    rcl_interfaces::msg::ParameterDescriptor max_power_descriptor;
+    max_power_descriptor.name = "max_power";
+    max_power_descriptor.type = rcl_interfaces::msg::ParameterType::PARAMETER_DOUBLE;
+    max_power_descriptor.description = "the maximum power between 0..1";
+    this->declare_parameter("max_power", 5, max_power_descriptor);
+
+    rcl_interfaces::msg::ParameterDescriptor holding_power_descriptor;
+    holding_power_descriptor.name = "holding_power";
+    holding_power_descriptor.type = rcl_interfaces::msg::ParameterType::PARAMETER_DOUBLE;
+    holding_power_descriptor.description = "the holding power between 0..1";
+    this->declare_parameter("holding_power", 5, holding_power_descriptor);
+    
     int busNumber = -1;
     this->get_parameter<int>("bus_number", busNumber);
 
     int boardAddress = -1;
     this->get_parameter<int>("board_address", boardAddress);
 
+    this->get_parameter<int>("step_delay_ms", this->_stepDelayMS);
+
+    double maxPower = 0;
+    this->get_parameter<double>("max_power", maxPower);
+
+    double holdingPower = -1;
+    this->get_parameter<double>("holding_power", holdingPower);
+
+    
     RCLCPP_INFO(this->get_logger(), "bus number=%d", busNumber);
     RCLCPP_INFO(this->get_logger(), "board address=%d", boardAddress);
+    RCLCPP_INFO(this->get_logger(), "step delay ms=%d", this->_stepDelayMS);
+    RCLCPP_INFO(this->get_logger(), "max power=%f", maxPower);
+    RCLCPP_INFO(this->get_logger(), "holding power=%f", holdingPower);
 
     this->_steps = this->create_subscription<example_interfaces::msg::Int32>("steps", 10,
             std::bind(&SingleStepperDriverNode::stepperCallback, this, std::placeholders::_1));
 
-    this->stepperControl = new passbutter::StepperControl("stepper", 0.3, 0.1);
+    this->stepperControl = new passbutter::StepperControl("stepper", maxPower, holdingPower);
 
     std::vector<int> boardAddrs;
     if (busNumber < 0 || boardAddress < 0)
@@ -72,7 +102,7 @@ void SingleStepperDriverNode::stepperCallback(const example_interfaces::msg::Int
     for (int i = 0; i < std::abs(msg->data); i++)
     {
         this->stepperControl->move(backwards);
-        rclcpp::sleep_for(std::chrono::milliseconds(this->stepDelayMS));
+        rclcpp::sleep_for(std::chrono::milliseconds(this->_stepDelayMS));
     }
 }
 

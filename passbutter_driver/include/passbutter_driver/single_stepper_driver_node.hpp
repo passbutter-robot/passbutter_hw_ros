@@ -15,7 +15,7 @@ private:
     passbutter::StepperControl *stepperControl;
     bool foundBoard;
 
-    const int stepDelayMS = 5;
+    int _stepDelayMS;
 
 public:
     SingleStepperDriverNode();

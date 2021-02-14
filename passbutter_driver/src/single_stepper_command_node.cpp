@@ -18,14 +18,16 @@ SingleStepperCommandNode::SingleStepperCommandNode()
     rate_seconds_descriptor.name = "rate_seconds";
     rate_seconds_descriptor.type = rcl_interfaces::msg::ParameterType::PARAMETER_INTEGER;
     rate_seconds_descriptor.description = "the amount of seconds after the next command is sent";
-    this->declare_parameter("rate_seconds", 0, rate_seconds_descriptor);
+    this->declare_parameter("rate_seconds", 1, rate_seconds_descriptor);
 
+    
     this->_stepCount = 0;
     this->get_parameter<int>("step_count", this->_stepCount);
 
     int rateSeconds = 0;
     this->get_parameter<int>("rate_seconds", rateSeconds);
 
+    
     this->_steps = this->create_publisher<example_interfaces::msg::Int32>("steps", this->_stepCount);
     this->_timer = this->create_wall_timer(std::chrono::seconds(rateSeconds),
             std::bind(&SingleStepperCommandNode::timer_callback, this));
