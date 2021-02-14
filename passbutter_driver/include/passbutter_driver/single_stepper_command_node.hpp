@@ -10,7 +10,8 @@ private:
     rclcpp::Publisher<example_interfaces::msg::Int32>::SharedPtr _steps;
     rclcpp::TimerBase::SharedPtr _timer;
 
-    int _last_step_count;
+    int _stepCount;
+    bool _reverse;
 
     void timer_callback();
 

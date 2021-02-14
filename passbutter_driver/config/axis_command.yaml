@@ -1,0 +1,19 @@
+axis_0:
+  ros__parameters:
+    step_count: 50
+    rate_seconds: 5
+
+axis_1:
+  ros__parameters:
+    step_count: 50
+    rate_seconds: 5
+
+axis_2:
+  ros__parameters:
+    step_count: 50
+    rate_seconds: 5
+
+axis_3:
+  ros__parameters:
+    step_count: 50
+    rate_seconds: 5

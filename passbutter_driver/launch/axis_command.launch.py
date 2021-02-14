@@ -6,11 +6,9 @@ import yaml
 
 from ament_index_python.packages import get_package_share_directory
 
-parameters_file_name = 'default.yaml'
-
 def generate_launch_description():
     config_dir = os.path.join(get_package_share_directory('passbutter_driver'), 'config')
-    param_config = os.path.join(config_dir, "axis_control.yaml")
+    param_config = os.path.join(config_dir, "axis_command.yaml")
     with open(param_config, 'r') as f:
         axis_0_params = yaml.safe_load(f)["axis_0"]["ros__parameters"]
 
@@ -25,25 +23,25 @@ def generate_launch_description():
 
     return launch.LaunchDescription([
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='single_stepper_command', output='screen',
             name='axis_0',
             parameters=[
                 axis_0_params
             ]),
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='single_stepper_command', output='screen',
             name='axis_1',
             parameters=[
                 axis_1_params
             ]),
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='single_stepper_command', output='screen',
             name='axis_2',
             parameters=[
                 axis_2_params
             ]),
         launch_ros.actions.Node(
-            package='passbutter_driver', executable='single_stepper_driver', output='screen',
+            package='passbutter_driver', executable='single_stepper_command', output='screen',
             name='axis_3',
             parameters=[
                 axis_3_params
