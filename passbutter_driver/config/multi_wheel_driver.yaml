@@ -1,0 +1,4 @@
+multi_axis_driver:
+  ros__parameters:
+    bus_number: 1
+    board_addresses: [10,11]

@@ -30,9 +30,20 @@ add_executable(stepper_command
   src/stepper_command_node.cpp)
 ament_target_dependencies(stepper_command rclcpp ros2_control example_interfaces)
 
+add_executable(wheel_driver 
+  src/wheel_driver_node.cpp
+  src/ThunderBorg/src/ThunderBorg.cpp)
+ament_target_dependencies(wheel_driver rclcpp ros2_control example_interfaces)
+
+add_executable(wheel_command 
+  src/wheel_command_node.cpp)
+ament_target_dependencies(wheel_command rclcpp ros2_control example_interfaces)
+
 install(TARGETS
   stepper_driver
   stepper_command
+  wheel_driver
+  wheel_command
   DESTINATION lib/${PROJECT_NAME}
 )
 

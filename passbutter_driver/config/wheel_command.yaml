@@ -1,0 +1,9 @@
+wheels_0:
+  ros__parameters:
+    speed: 0.35
+    rate_seconds: 5
+
+wheels_1:
+  ros__parameters:
+    speed: 0.35
+    rate_seconds: 5
