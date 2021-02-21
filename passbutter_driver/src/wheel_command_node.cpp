@@ -12,7 +12,7 @@ WheelCommandNode::WheelCommandNode()
     target_speed_descriptor.name = "target_speed";
     target_speed_descriptor.type = rcl_interfaces::msg::ParameterType::PARAMETER_DOUBLE;
     target_speed_descriptor.description = "the motor speed [0..1]";
-    this->declare_parameter("target_speed", 0, target_speed_descriptor);
+    this->declare_parameter("target_speed", 0.0, target_speed_descriptor);
 
     rcl_interfaces::msg::ParameterDescriptor rate_seconds_descriptor;
     rate_seconds_descriptor.name = "rate_seconds";
@@ -21,8 +21,8 @@ WheelCommandNode::WheelCommandNode()
     this->declare_parameter("rate_seconds", 1, rate_seconds_descriptor);
 
     
-    this->_target_speed = 0;
-    this->get_parameter<float>("target_speed", this->_target_speed);
+    this->_target_speed = 0.0;
+    this->get_parameter<double>("target_speed", this->_target_speed);
 
     int rateSeconds = 0;
     this->get_parameter<int>("rate_seconds", rateSeconds);
@@ -37,7 +37,7 @@ WheelCommandNode::WheelCommandNode()
 void WheelCommandNode::timer_callback()
 {
     auto msg = example_interfaces::msg::Float32();
-    msg.data = this->_target_speed;
+    msg.data = (float)this->_target_speed;
     if (this->_reverse) msg.data *= -1;
     this->_reverse = !this->_reverse;
 
