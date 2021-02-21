@@ -10,7 +10,7 @@ private:
     rclcpp::Publisher<example_interfaces::msg::Float32>::SharedPtr _wheel_speed;
     rclcpp::TimerBase::SharedPtr _timer;
 
-    float _target_speed;
+    double _target_speed;
     bool _reverse;
 
     void timer_callback();

@@ -18,13 +18,13 @@ def generate_launch_description():
     return launch.LaunchDescription([
         launch_ros.actions.Node(
             package='passbutter_driver', executable='wheel_command', output='screen',
-            name='axis_0',
+            name='wheels_0',
             parameters=[
                 wheels_0_params
             ]),
         launch_ros.actions.Node(
             package='passbutter_driver', executable='wheel_command', output='screen',
-            name='axis_1',
+            name='wheels_1',
             parameters=[
                 wheels_1_params
             ])
